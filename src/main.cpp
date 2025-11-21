@@ -55,12 +55,11 @@ bool updateDisplay() {
 }
 
 void loop() {
-    delay(500);
     if (updateDisplay()) {
         lightYear->setDisplay(colors);
         lightYear->show();
     } else {
         lightYear->setPixel(CRGB::Red);
     }
-    delay(5000);
+    delay(1000);
 }
