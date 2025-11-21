@@ -2,6 +2,7 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include "../lib/lightyear/LightYear.h"
+#include "../lib/animation/IAnimation.h"
 
 #define WIFI_SSID "infi guests"
 #define WIFI_PASS "sp@ceinv@der"
@@ -54,7 +55,32 @@ bool updateDisplay() {
     return code == HTTP_CODE_OK;
 }
 
+uint32_t *vecToUintArray(std::vector<CRGB> frame) {
+    uint32_t *result = new uint32_t[NUM_LEDS_TOTAL];
+
+    const int size = frame.size();
+    for (size_t i = 0; i < size; ++i) {
+        const CRGB &c = frame[i];
+        result[i] = static_cast<uint32_t>(c.r) << 16 |
+                    static_cast<uint32_t>(c.g) << 8 |
+                    static_cast<uint32_t>(c.b);
+    }
+
+    return result;
+}
+
+IAnimation *anim = new Wave();
+
 void loop() {
+    uint32_t *frame = vecToUintArray(anim->frame());
+    lightYear->setDisplay(frame);
+    delete[] frame;
+    lightYear->show();
+    delay(1000 / 60);
+
+    // TODO: Animation or online data.
+    return;
+
     if (updateDisplay()) {
         lightYear->setDisplay(colors);
         lightYear->show();

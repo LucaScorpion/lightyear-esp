@@ -18,6 +18,9 @@
 
 #define NUM_LEDS_TOTAL NUM_LEDS_1 + NUM_LEDS_2 + NUM_LEDS_3 + NUM_LEDS_4
 
+#define BOARD_WIDTH 52
+#define BOARD_HEIGHT 7
+
 class LightYear {
     CRGB leds1[NUM_LEDS_1];
     CRGB leds2[NUM_LEDS_2];
@@ -31,4 +34,4 @@ public:
     void setDisplay(uint32_t *colors);
 };
 
-#endif //LIGHTYEAR_H
+#endif
