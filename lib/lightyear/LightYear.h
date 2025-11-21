@@ -16,6 +16,8 @@
 #define NUM_LEDS_3 104
 #define NUM_LEDS_4 52
 
+#define NUM_LEDS_TOTAL NUM_LEDS_1 + NUM_LEDS_2 + NUM_LEDS_3 + NUM_LEDS_4
+
 class LightYear {
     CRGB leds1[NUM_LEDS_1];
     CRGB leds2[NUM_LEDS_2];
@@ -25,7 +27,8 @@ class LightYear {
 public:
     LightYear();
     void show();
-    void setPixel(uint8_t index, CRGB color);
+    void setPixel(CRGB color);
+    void setDisplay(uint32_t *colors);
 };
 
 #endif //LIGHTYEAR_H
