@@ -72,15 +72,6 @@ uint32_t *vecToUintArray(std::vector<CRGB> frame) {
 IAnimation *anim = new Wave();
 
 void loop() {
-    uint32_t *frame = vecToUintArray(anim->frame());
-    lightYear->setDisplay(frame);
-    delete[] frame;
-    lightYear->show();
-    delay(1000 / 60);
-
-    // TODO: Animation or online data.
-    return;
-
     if (updateDisplay()) {
         lightYear->setDisplay(colors);
         lightYear->show();
@@ -88,4 +79,13 @@ void loop() {
         lightYear->setPixel(CRGB::Red);
     }
     delay(1000);
+
+    // TODO: Animation or online data.
+    return;
+
+    uint32_t *frame = vecToUintArray(anim->frame());
+    lightYear->setDisplay(frame);
+    delete[] frame;
+    lightYear->show();
+    delay(1000 / 60);
 }
