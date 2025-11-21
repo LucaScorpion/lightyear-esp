@@ -1,19 +1,27 @@
 #include <Arduino.h>
-#include <FastLED.h>
+#include "../lib/lightyear/LightYear.h"
 
-#define LED_TYPE WS2815
-#define COLOR_ORDER GRB
-
-#define NUM_LEDS 10
-CRGB leds[NUM_LEDS];
+LightYear *lightYear;
 
 void setup() {
-    FastLED.addLeds<LED_TYPE, 2>(leds, NUM_LEDS);
+    lightYear = new LightYear();
+    FastLED.setBrightness(255);
 }
 
 void loop() {
-    leds[0] = CRGB::Red; FastLED.show();
+    lightYear->setPixel(0, CRGB::Red);
+    lightYear->show();
     delay(500);
-    leds[0] = CRGB::Blue; FastLED.show();
+    lightYear->setPixel(0, CRGB::Green);
+    lightYear->show();
+    delay(500);
+    lightYear->setPixel(0, CRGB::Blue);
+    lightYear->show();
+    delay(500);
+    lightYear->setPixel(0, CRGB::Black);
+    lightYear->show();
+    delay(500);
+    lightYear->setPixel(0, CRGB::White);
+    lightYear->show();
     delay(500);
 }
